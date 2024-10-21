@@ -1,0 +1,32 @@
+# 配置服务端口号
+server:
+  port: 10100
+
+# 配置数据库的连接信息
+spring:
+  application:
+    # 每一个服务注册到nacos注册中心都需要提供一个唯一的服务名称
+    name: cloud-user
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 10.211.55.10:8848
+        namespace: ba640a5a-e8be-47cd-be38-6f9e48551ac8
+        file-extension: yml
+      discovery:
+        server-addr: 10.211.55.10:8848
+#        cluster-name: SH
+        namespace: ba640a5a-e8be-47cd-be38-6f9e48551ac8
+  config:
+    import:
+      - nacos:${spring.application.name}-${spring.profiles.active}.yml
+#      - nacos:mysql-user.yml
+
+
+
+# 配置mybatis-plus的相关信息
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
